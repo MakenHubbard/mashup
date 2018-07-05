@@ -10,8 +10,29 @@ import './App.css';
 class App extends Component {
   state = {
     animals: [],
+    addedAnimalId: -1,
   }
-  componentDidMount () {
+
+  addingAnimalEvent = (id) => {
+    this.setState({
+      addedAnimalId: id,
+    });
+  }
+
+  formSubmitEvent = (newAnimal) => {
+    animalsRequest.postRequest(newAnimal)
+      .then(() => {
+        animalsRequest.getRequest()
+          .then((animals) => {
+            this.setState({ animals });
+          });
+      })
+      .catch((err) => {
+        console.error('something went wrong in the post', err);
+      });
+  }
+
+  componentDidMount() {
 
     connection();
     animalsRequest.getRequest()
@@ -24,13 +45,23 @@ class App extends Component {
   }
 
   render () {
+    const { addedAnimalId, animals } = this.state;
+    // need to add keys to the animals trying that here
+    const addedAnimal = animals.find(animal => animal.id === addedAnimalId);
+
     return (
       <div className="App">
         <div className="col-sm-6">
-          <Animals animals={this.state.animals}/>
+          <Animals
+            animals={this.state.animals}
+            addedAnimal={this.addingAnimalEvent}
+            addedAnimal=
+          />
         </div>
         <div className="col-sm-6">
-          <FormField />
+          <FormField
+            onSubmit={this.formSubmitEvent}
+          />
         </div>
       </div>
     );
