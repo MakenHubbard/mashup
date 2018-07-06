@@ -93,7 +93,7 @@ class Forms extends React.Component {
                 type="text"
                 id="description"
                 value={newAnimal.description}
-                onChange={this.description}
+                onChange={this.descriptionChange}
               />
             </fieldset>
           </div>
