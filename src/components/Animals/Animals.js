@@ -15,22 +15,18 @@ class Animals extends React.Component {
     const mashupsItemComponents = animals.map((animal) => {
       // need to fix this in a way it will work its not liking the returns
       return (
-        <Animals
-          key={animal.id}
-        />
-      );
-    });
-    return (
-      <div className="col-sm-6 col-md-4">
-        <div className="thumbnail">
-          <img src={animal.imgUrl} alt="..." />
-          <div className="caption">
-            <h3>{animal.name}</h3>
-            <p>{animal.description}</p>
+        <div key={animal.id} className="col-sm-6 col-md-4">
+          <div className="thumbnail">
+            <img src={animal.imgUrl} alt="..." />
+            <div className="caption">
+              <h3>{animal.name}</h3>
+              <p>{animal.description}</p>
+            </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    });
+
     return (
       <div className="Animals">
         {mashupsItemComponents}

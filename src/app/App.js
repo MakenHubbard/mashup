@@ -32,7 +32,7 @@ class App extends Component {
       });
   }
 
-  componentDidMount() {
+  componentDidMount () {
 
     connection();
     animalsRequest.getRequest()
@@ -45,17 +45,11 @@ class App extends Component {
   }
 
   render () {
-    const { addedAnimalId, animals } = this.state;
-    // need to add keys to the animals trying that here
-    const addedAnimal = animals.find(animal => animal.id === addedAnimalId);
-
     return (
       <div className="App">
         <div className="col-sm-6">
           <Animals
             animals={this.state.animals}
-            addedAnimal={this.addingAnimalEvent}
-            addedAnimal=
           />
         </div>
         <div className="col-sm-6">

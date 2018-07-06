@@ -23,7 +23,7 @@ class Forms extends React.Component {
   formFieldStringState = (info, e) => {
     const tempAnimal = { ...this.state.newAnimal };
     tempAnimal[info] = e.target.value;
-    this.setState({ newAnima: tempAnimal });
+    this.setState({ newAnimal: tempAnimal });
   }
 
   nameChange = (e) => {
@@ -59,7 +59,7 @@ class Forms extends React.Component {
     return (
       <div className="col-xs-12">
         <form onSubmit={this.formSubmit} className="form-horizontal">
-          <div >
+          <div className="row">
             <fieldset className="col-xs-3">
               <label htmlFor="name">Name:</label>
               <input
@@ -72,7 +72,7 @@ class Forms extends React.Component {
             </fieldset>
           </div>
 
-          <div >
+          <div className="row">
             <fieldset className="col-xs-3">
               <label htmlFor="imgUrl">Image Url:</label>
               <input
@@ -85,10 +85,10 @@ class Forms extends React.Component {
             </fieldset>
           </div>
 
-          <div >
+          <div className="row">
             <fieldset className="col-xs-12">
               <label htmlFor="description">Description:</label>
-              <textarea
+              <input
                 className="col-xs-12"
                 type="text"
                 id="description"
