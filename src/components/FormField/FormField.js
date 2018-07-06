@@ -1,28 +1,105 @@
 import React from 'react';
 
+import PropTypes from 'prop-types';
+
 import './FormField.css';
 
+const defaultAnimal = {
+  name: '',
+  imgUrl: '',
+  description: '',
+};
+
 class Forms extends React.Component {
+
+  static propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+  };
+
+  state = {
+    newAnimal: defaultAnimal,
+  }
+
+  formFieldStringState = (info, e) => {
+    const tempAnimal = { ...this.state.newAnimal };
+    tempAnimal[info] = e.target.value;
+    this.setState({ newAnimal: tempAnimal });
+  }
+
+  nameChange = (e) => {
+    this.formFieldStringState('name', e);
+  }
+
+  imageChange = (e) => {
+    this.formFieldStringState('imgUrl', e);
+  }
+
+  descriptionChange = (e) => {
+    this.formFieldStringState('description', e);
+  }
+
+  formSubmit = (e) => {
+    const { onSubmit } = this.props;
+    const { newAnimal } = this.state;
+    e.preventDefault();
+    if (
+      newAnimal.name &&
+      newAnimal.imgUrl &&
+      newAnimal.description
+    ) {
+      onSubmit(this.state.newAnimal);
+      this.setState({ newAnimal: defaultAnimal });
+    } else {
+      alert('dubya tea Eff mate');
+    }
+  }
+
   render () {
+    const { newAnimal } = this.state;
     return (
-      <form class="form-horizontal">
-        <div class="form-group">
-          <label for="exampleInputEmail1">Name: </label>
-          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" />
-        </div>
+      <div className="col-xs-12">
+        <form onSubmit={this.formSubmit} className="form-horizontal">
+          <div className="row">
+            <fieldset className="col-xs-3">
+              <label htmlFor="name">Name:</label>
+              <input
+                className="col-xs-12"
+                type="text"
+                id="name"
+                value={newAnimal.name}
+                onChange={this.nameChange}
+              />
+            </fieldset>
+          </div>
 
-        <div class="form-group">
-          <label for="exampleInputPassword1">Image URL: </label>
-          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" />
-        </div>
+          <div className="row">
+            <fieldset className="col-xs-3">
+              <label htmlFor="imgUrl">Image Url:</label>
+              <input
+                className="col-xs-12"
+                type="text"
+                id="imgUrl"
+                value={newAnimal.imgUrl}
+                onChange={this.imageChange}
+              />
+            </fieldset>
+          </div>
 
-        <div class="form-group">
-          <label for="exampleTextArea">Description: </label>
-          <textarea class="form-control" id="exampleTextArea" rows="5"></textarea>
-        </div>
-
-        <button type="submit" class="btn btn-success">Add Mashup</button>
-      </form>
+          <div className="row">
+            <fieldset className="col-xs-12">
+              <label htmlFor="description">Description:</label>
+              <input
+                className="col-xs-12"
+                type="text"
+                id="description"
+                value={newAnimal.description}
+                onChange={this.description}
+              />
+            </fieldset>
+          </div>
+          <button type="submit" className="btn btn-success">Add Mashup</button>
+        </form>
+      </div>
     );
   }
 }
