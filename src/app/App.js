@@ -45,11 +45,14 @@ class App extends Component {
   }
 
   render () {
+    const { addedAnimalId, animals } = this.state;
+    const addedAnimal = animals.find(animal => animal.id === addedAnimalId)
     return (
       <div className="App">
         <div className="col-sm-6">
           <Animals
             animals={this.state.animals}
+            animal={addedAnimal}
           />
         </div>
         <div className="col-sm-6">
